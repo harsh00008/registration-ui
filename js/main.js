@@ -121,12 +121,13 @@ function verifyPasswordMatch(rePass){
 }
 	
 	
-function saveValues(tag){
+function saveToSessionStorage(){
 	var registrationForm = document.getElementById("registration-form");
 	for (var i = 0; i < registrationForm.elements.length; i++) {
 		if(registrationForm.elements[i].type!= "submit" && registrationForm.elements[i].value!= null && registrationForm.elements[i].value!="Cancel"){
-			var fieldName = registrationForm.elements[i].name;
-			var fieldValue = registrationForm.elements[i].value;
+			var field = registrationForm.elements[i];
+			var fieldName = field.name;
+			var fieldValue = field.value;
 			console.log("saving to sessionStorage..." + fieldName + ": " + fieldValue);
 			sessionStorage.setItem(fieldName, fieldValue);
 		}
@@ -193,7 +194,7 @@ function submitForm(){
 		alert("Errors: \n" + error);
 		return false;
 	}
-	saveValues("input");
+	saveToSessionStorage();
 	return false;
 }
 

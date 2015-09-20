@@ -149,3 +149,18 @@ progress[value] {
 	background-color: #747E80;
 	width: 82px;
 }
+
+.checkbox-container{
+	width: 55%;
+	display: inline-block;
+}
+
+.checkbox{
+	width: 40%;
+	display: inline-block;
+}
+
+.form-group input[name=interest]{
+	width:42%;
+	display: inline;
+}

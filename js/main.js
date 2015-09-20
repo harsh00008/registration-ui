@@ -124,22 +124,18 @@ function verifyPasswordMatch(rePass){
 function saveValues(tag){
 	var registrationForm = document.getElementById("registration-form");
 	for (var i = 0; i < registrationForm.elements.length; i++) {
-		if(registrationForm.elements[i].type!= "submit" && registrationForm.elements[i].value!= null){
+		if(registrationForm.elements[i].type!= "submit" && registrationForm.elements[i].value!= null && registrationForm.elements[i].value!="Cancel"){
 			var fieldName = registrationForm.elements[i].name;
 			var fieldValue = registrationForm.elements[i].value;
 			console.log("saving to sessionStorage..." + fieldName + ": " + fieldValue);
 			sessionStorage.setItem(fieldName, fieldValue);
 		}
 	}
-}
-
-function validateForm(){
-	
-	return false;
+	alert("Stored data to session!");
 }
 
 function submitForm(){
-	saveValues("input");	
+	
 	var error = "";
 	var username = document.getElementById("username").value;
 	var password = document.getElementById("password").value;
@@ -151,7 +147,17 @@ function submitForm(){
 	var securityAnswerOne = document.getElementById("security-answer-1").value;
 	var securityTwo = document.getElementById("security-question-2").value;
 	var securityAnswerTwo = document.getElementById("security-answer-2").value;
+	var interests = document.getElementsByName("interest");
 
+	var checked = 0;
+	for(var i = 0; i< interests.length; i++){
+		if(interests[i].checked){
+			checked++;
+		}
+	}
+	if(checked == 0){
+		error = error + " - Please check atleast one interest.\n";
+	}
 
 	if(username.length == 0){
 		error = error + " - Username cannot be left blank.\n";
@@ -187,6 +193,7 @@ function submitForm(){
 		alert("Errors: \n" + error);
 		return false;
 	}
+	saveValues("input");
 	return false;
 }
 
@@ -245,7 +252,7 @@ function validateSecurityQuestion(question){
 		error.style.color="red";
 		error.innerHTML="Both questions cannot be same"
 	}else{
-		
+		error.innerHTML="";
 	}
 }
 
@@ -261,3 +268,5 @@ function clearForm(){
         // elements[i] no longer exists past this point, in most browsers
     } 
 }
+
+
